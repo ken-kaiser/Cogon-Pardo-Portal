@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ certificate_type }}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1.5cm;
+        }
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 0;
+            padding: 40px;
+            color: #1a1a1a;
+        }
+        .certificate-container {
+            border: 3px double #1a3a5c;
+            padding: 40px;
+            min-height: 700px;
+            position: relative;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h3 {
+            margin: 0;
+            font-size: 14px;
+            font-weight: normal;
+            color: #333;
+        }
+        .header h1 {
+            margin: 10px 0 5px;
+            font-size: 22px;
+            color: #1a3a5c;
+            letter-spacing: 2px;
+        }
+        .header h2 {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #2c5f8a;
+        }
+        .header .line {
+            border-bottom: 2px solid #1a3a5c;
+            margin: 15px auto;
+            width: 80%;
+        }
+        .title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #1a3a5c;
+            margin: 30px 0;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        .body-text {
+            font-size: 14px;
+            line-height: 2;
+            text-align: justify;
+            margin: 20px 30px;
+        }
+        .body-text .highlight {
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 15px;
+        }
+        .purpose {
+            margin: 20px 30px;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+        .date-issued {
+            margin: 30px 30px 10px;
+            font-size: 14px;
+        }
+        .signatures {
+            display: flex;
+            justify-content: space-between;
+            margin: 60px 30px 20px;
+        }
+        .signature-block {
+            text-align: center;
+            width: 200px;
+        }
+        .signature-block .line {
+            border-bottom: 1px solid #333;
+            margin-bottom: 5px;
+        }
+        .signature-block .name {
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .signature-block .title-label {
+            font-size: 12px;
+            color: #555;
+        }
+        .footer {
+            text-align: center;
+            font-size: 11px;
+            color: #777;
+            margin-top: 40px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="certificate-container">
+        <div class="header">
+            <h3>Republic of the Philippines</h3>
+            <h3>Province / City</h3>
+            <h1>BARANGAY COGON-PARDO</h1>
+            <h2>Office of the Barangay Captain</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="title">{{ certificate_type }}</div>
+
+        <div class="body-text">
+            <p>
+                TO WHOM IT MAY CONCERN:
+            </p>
+            <p>
+                This is to certify that <span class="highlight">{{ full_name }}</span>,
+                of legal age, a resident of <span class="highlight">{{ purok_sitio }}, {{ address }}</span>,
+                is a bonafide resident of this barangay.
+            </p>
+        </div>
+
+        {% if purpose %}
+        <div class="purpose">
+            <p>
+                This certification is being issued upon the request of the above-named person
+                for <strong>{{ purpose }}</strong> purposes.
+            </p>
+        </div>
+        {% endif %}
+
+        <div class="date-issued">
+            <p>Issued this <strong>{{ date_today_formatted }}</strong> at Barangay Cogon-Pardo.</p>
+        </div>
+
+        <div class="signatures">
+            <div class="signature-block">
+                <div class="line"></div>
+                <div class="name">{{ barangay_captain }}</div>
+                <div class="title-label">Barangay Captain</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Not valid without official barangay seal.</p>
+            <p>Request ID: {{ request.request_id }}</p>
+        </div>
+    </div>
+</body>
+</html>
